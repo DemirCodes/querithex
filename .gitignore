@@ -1,0 +1,47 @@
+# Derleme çıktıları
+*.o
+*.a
+*.so
+*.out
+querithex
+build/
+
+# Debug / sanitizer
+*.dSYM/
+*.gcda
+*.gcno
+*.gcov
+vgcore.*
+core
+core.*
+
+# Editör / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Test geçici dosyaları
+tests/fixtures/tmp/
+tests/golden/tmp/
+tests/*.log
+!tests/fixtures/*.log
+
+# Fuzz geçici
+fuzz/output/
+fuzz/crash-*
+fuzz/leak-*
+
+# Rapor çıktıları
+*.report.json
+*.report.csv
+*.report.html
+*.report.txt
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Kişisel config
+querithex.conf.local
