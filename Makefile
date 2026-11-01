@@ -1,6 +1,3 @@
-# Querithex — Makefile
-# README Bölüm 13 (Faz 0): -std=c11 -Wall -Wextra -Wpedantic -Werror
-
 CC      ?= cc
 CFLAGS  ?= -std=c11 -Wall -Wextra -Wpedantic -Werror -O2
 CPPFLAGS ?=
