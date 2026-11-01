@@ -12,8 +12,8 @@ build/
 *.gcno
 *.gcov
 vgcore.*
-core
-core.*
+/core
+/core.*
 
 # Editör / IDE
 .vscode/
