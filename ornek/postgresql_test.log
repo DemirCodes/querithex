@@ -1,0 +1,132 @@
+2026-11-01 18:29:40.207 UTC [1] LOG:  starting PostgreSQL 16.11 (Debian 16.11-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+2026-11-01 18:29:40.208 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2026-11-01 18:29:40.208 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2026-11-01 18:29:40.210 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-11-01 18:29:40.214 UTC [29] LOG:  database system was shut down at 2026-11-01 18:29:39 UTC
+2026-11-01 18:29:40.218 UTC [1] LOG:  database system is ready to accept connections
+2026-11-01 18:29:50.888 UTC [39] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:29:50.889 UTC [39] postgres@app_test/[unknown] [local] LOG:  connection authorized: user=postgres database=app_test application_name=psql
+2026-11-01 18:29:50.891 UTC [39] postgres@app_test/psql [local] LOG:  disconnection: session time: 0:00:00.002 user=postgres database=app_test host=[local]
+2026-11-01 18:30:08.188 UTC [46] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:30:08.189 UTC [46] postgres@app_test/[unknown] [local] LOG:  connection authorized: user=postgres database=app_test application_name=psql
+2026-11-01 18:30:08.199 UTC [46] postgres@app_test/psql [local] LOG:  disconnection: session time: 0:00:00.010 user=postgres database=app_test host=[local]
+2026-11-01 18:30:12.400 UTC [54] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:30:12.401 UTC [54] test_user@app_test/[unknown] [local] LOG:  connection authorized: user=test_user database=app_test application_name=psql
+2026-11-01 18:30:12.402 UTC [54] test_user@app_test/psql [local] LOG:  disconnection: session time: 0:00:00.001 user=test_user database=app_test host=[local]
+2026-11-01 18:30:58.830 UTC [63] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:30:58.831 UTC [63] test_user@app_test/[unknown] [local] LOG:  connection authorized: user=test_user database=app_test application_name=psql
+2026-11-01 18:30:58.904 UTC [63] test_user@app_test/psql [local] ERROR:  must be able to SET ROLE "postgres"
+2026-11-01 18:30:58.904 UTC [63] test_user@app_test/psql [local] STATEMENT:  ALTER TABLE public.customers OWNER TO postgres;
+2026-11-01 18:30:58.904 UTC [63] test_user@app_test/psql [local] ERROR:  must be able to SET ROLE "postgres"
+2026-11-01 18:30:58.904 UTC [63] test_user@app_test/psql [local] STATEMENT:  ALTER SEQUENCE public.customers_id_seq OWNER TO postgres;
+2026-11-01 18:30:58.906 UTC [63] test_user@app_test/psql [local] ERROR:  must be able to SET ROLE "postgres"
+2026-11-01 18:30:58.906 UTC [63] test_user@app_test/psql [local] STATEMENT:  ALTER TABLE public.orders OWNER TO postgres;
+2026-11-01 18:30:58.907 UTC [63] test_user@app_test/psql [local] ERROR:  must be able to SET ROLE "postgres"
+2026-11-01 18:30:58.907 UTC [63] test_user@app_test/psql [local] STATEMENT:  ALTER SEQUENCE public.orders_id_seq OWNER TO postgres;
+2026-11-01 18:30:58.923 UTC [63] test_user@app_test/psql [local] ERROR:  role "ro_user" does not exist
+2026-11-01 18:30:58.923 UTC [63] test_user@app_test/psql [local] STATEMENT:  GRANT USAGE ON SCHEMA public TO ro_user;
+2026-11-01 18:30:58.923 UTC [63] test_user@app_test/psql [local] ERROR:  role "ro_user" does not exist
+2026-11-01 18:30:58.923 UTC [63] test_user@app_test/psql [local] STATEMENT:  GRANT SELECT ON TABLE public.customers TO ro_user;
+2026-11-01 18:30:58.923 UTC [63] test_user@app_test/psql [local] ERROR:  role "ro_user" does not exist
+2026-11-01 18:30:58.923 UTC [63] test_user@app_test/psql [local] STATEMENT:  GRANT SELECT,USAGE ON SEQUENCE public.customers_id_seq TO ro_user;
+2026-11-01 18:30:58.923 UTC [63] test_user@app_test/psql [local] ERROR:  role "ro_user" does not exist
+2026-11-01 18:30:58.923 UTC [63] test_user@app_test/psql [local] STATEMENT:  GRANT SELECT ON TABLE public.orders TO ro_user;
+2026-11-01 18:30:58.923 UTC [63] test_user@app_test/psql [local] ERROR:  role "ro_user" does not exist
+2026-11-01 18:30:58.923 UTC [63] test_user@app_test/psql [local] STATEMENT:  GRANT SELECT,USAGE ON SEQUENCE public.orders_id_seq TO ro_user;
+2026-11-01 18:30:58.923 UTC [63] test_user@app_test/psql [local] ERROR:  role "ro_user" does not exist
+2026-11-01 18:30:58.923 UTC [63] test_user@app_test/psql [local] STATEMENT:  ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public GRANT SELECT,USAGE ON SEQUENCES TO ro_user;
+2026-11-01 18:30:58.923 UTC [63] test_user@app_test/psql [local] ERROR:  role "ro_user" does not exist
+2026-11-01 18:30:58.923 UTC [63] test_user@app_test/psql [local] STATEMENT:  ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public GRANT SELECT ON TABLES TO ro_user;
+2026-11-01 18:30:58.923 UTC [63] test_user@app_test/psql [local] LOG:  disconnection: session time: 0:00:00.092 user=test_user database=app_test host=[local]
+2026-11-01 18:31:06.300 UTC [70] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:31:06.301 UTC [70] test_user@app_test/[unknown] [local] LOG:  connection authorized: user=test_user database=app_test application_name=psql
+2026-11-01 18:31:06.303 UTC [70] test_user@app_test/psql [local] LOG:  disconnection: session time: 0:00:00.002 user=test_user database=app_test host=[local]
+2026-11-01 18:31:06.356 UTC [77] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:31:06.357 UTC [77] test_user@app_test/[unknown] [local] LOG:  connection authorized: user=test_user database=app_test application_name=psql
+2026-11-01 18:31:06.358 UTC [77] test_user@app_test/psql [local] LOG:  disconnection: session time: 0:00:00.001 user=test_user database=app_test host=[local]
+2026-11-01 18:31:06.410 UTC [84] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:31:06.410 UTC [84] test_user@app_test/[unknown] [local] LOG:  connection authorized: user=test_user database=app_test application_name=psql
+2026-11-01 18:31:06.411 UTC [84] test_user@app_test/psql [local] LOG:  disconnection: session time: 0:00:00.001 user=test_user database=app_test host=[local]
+2026-11-01 18:31:27.379 UTC [92] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:31:27.380 UTC [92] test_user@app_test/[unknown] [local] LOG:  connection authorized: user=test_user database=app_test application_name=pg_restore
+2026-11-01 18:31:27.392 UTC [92] test_user@app_test/pg_restore [local] ERROR:  must be able to SET ROLE "postgres"
+2026-11-01 18:31:27.392 UTC [92] test_user@app_test/pg_restore [local] STATEMENT:  ALTER TABLE public.customers OWNER TO postgres;
+	
+	
+2026-11-01 18:31:27.393 UTC [92] test_user@app_test/pg_restore [local] ERROR:  must be able to SET ROLE "postgres"
+2026-11-01 18:31:27.393 UTC [92] test_user@app_test/pg_restore [local] STATEMENT:  ALTER SEQUENCE public.customers_id_seq OWNER TO postgres;
+	
+	
+2026-11-01 18:31:27.394 UTC [92] test_user@app_test/pg_restore [local] ERROR:  must be able to SET ROLE "postgres"
+2026-11-01 18:31:27.394 UTC [92] test_user@app_test/pg_restore [local] STATEMENT:  ALTER TABLE public.orders OWNER TO postgres;
+	
+	
+2026-11-01 18:31:27.395 UTC [92] test_user@app_test/pg_restore [local] ERROR:  must be able to SET ROLE "postgres"
+2026-11-01 18:31:27.395 UTC [92] test_user@app_test/pg_restore [local] STATEMENT:  ALTER SEQUENCE public.orders_id_seq OWNER TO postgres;
+	
+	
+2026-11-01 18:31:27.411 UTC [92] test_user@app_test/pg_restore [local] LOG:  disconnection: session time: 0:00:00.031 user=test_user database=app_test host=[local]
+2026-11-01 18:31:41.871 UTC [100] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:31:41.871 UTC [100] test_user@app_test/[unknown] [local] LOG:  connection authorized: user=test_user database=app_test application_name=pg_restore
+2026-11-01 18:31:42.038 UTC [100] test_user@app_test/pg_restore [local] LOG:  disconnection: session time: 0:00:00.166 user=test_user database=app_test host=[local]
+2026-11-01 18:31:45.575 UTC [107] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:31:45.576 UTC [107] test_user@app_test/[unknown] [local] LOG:  connection authorized: user=test_user database=app_test application_name=pg_restore
+2026-11-01 18:31:45.694 UTC [107] test_user@app_test/pg_restore [local] LOG:  duration: 107.535 ms  statement: CREATE TABLE public.customers (
+	    id integer NOT NULL,
+	    name text NOT NULL,
+	    email text,
+	    created_at timestamp with time zone DEFAULT now()
+	);
+	
+	
+	
+2026-11-01 18:31:45.713 UTC [107] test_user@app_test/pg_restore [local] LOG:  disconnection: session time: 0:00:00.137 user=test_user database=app_test host=[local]
+2026-11-01 18:31:49.888 UTC [114] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:31:49.888 UTC [114] test_user@app_test/[unknown] [local] LOG:  connection authorized: user=test_user database=app_test application_name=psql
+2026-11-01 18:31:49.890 UTC [114] test_user@app_test/psql [local] LOG:  disconnection: session time: 0:00:00.002 user=test_user database=app_test host=[local]
+2026-11-01 18:31:49.944 UTC [121] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:31:49.944 UTC [121] test_user@app_test/[unknown] [local] LOG:  connection authorized: user=test_user database=app_test application_name=psql
+2026-11-01 18:31:49.945 UTC [121] test_user@app_test/psql [local] LOG:  disconnection: session time: 0:00:00.001 user=test_user database=app_test host=[local]
+2026-11-01 18:31:49.998 UTC [128] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:31:49.998 UTC [128] test_user@app_test/[unknown] [local] LOG:  connection authorized: user=test_user database=app_test application_name=psql
+2026-11-01 18:31:50.000 UTC [128] test_user@app_test/psql [local] LOG:  disconnection: session time: 0:00:00.001 user=test_user database=app_test host=[local]
+2026-11-01 18:34:00.942 UTC [142] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:34:00.943 UTC [142] test_user@app_test/[unknown] [local] LOG:  connection authorized: user=test_user database=app_test application_name=pg_restore
+2026-11-01 18:34:01.091 UTC [142] test_user@app_test/pg_restore [local] LOG:  temporary file: path "base/pgsql_tmp/pgsql_tmp142.1.fileset/1.0", size 8192
+2026-11-01 18:34:01.091 UTC [142] test_user@app_test/pg_restore [local] STATEMENT:  ALTER TABLE ONLY public.pgbench_accounts
+	    ADD CONSTRAINT pgbench_accounts_pkey PRIMARY KEY (aid);
+	
+	
+	
+2026-11-01 18:34:01.091 UTC [142] test_user@app_test/pg_restore [local] LOG:  temporary file: path "base/pgsql_tmp/pgsql_tmp142.1.fileset/0.0", size 8192
+2026-11-01 18:34:01.091 UTC [142] test_user@app_test/pg_restore [local] STATEMENT:  ALTER TABLE ONLY public.pgbench_accounts
+	    ADD CONSTRAINT pgbench_accounts_pkey PRIMARY KEY (aid);
+	
+	
+	
+2026-11-01 18:34:01.092 UTC [142] test_user@app_test/pg_restore [local] LOG:  temporary file: path "base/pgsql_tmp/pgsql_tmp142.0.fileset/1.0", size 802816
+2026-11-01 18:34:01.092 UTC [142] test_user@app_test/pg_restore [local] STATEMENT:  ALTER TABLE ONLY public.pgbench_accounts
+	    ADD CONSTRAINT pgbench_accounts_pkey PRIMARY KEY (aid);
+	
+	
+	
+2026-11-01 18:34:01.092 UTC [142] test_user@app_test/pg_restore [local] LOG:  temporary file: path "base/pgsql_tmp/pgsql_tmp142.0.fileset/0.0", size 1212416
+2026-11-01 18:34:01.092 UTC [142] test_user@app_test/pg_restore [local] STATEMENT:  ALTER TABLE ONLY public.pgbench_accounts
+	    ADD CONSTRAINT pgbench_accounts_pkey PRIMARY KEY (aid);
+	
+	
+	
+2026-11-01 18:34:01.101 UTC [142] test_user@app_test/pg_restore [local] LOG:  disconnection: session time: 0:00:00.159 user=test_user database=app_test host=[local]
+2026-11-01 18:34:01.155 UTC [150] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:34:01.155 UTC [150] test_user@app_test/[unknown] [local] LOG:  connection authorized: user=test_user database=app_test application_name=pgbench
+2026-11-01 18:34:01.236 UTC [150] test_user@app_test/pgbench [local] LOG:  disconnection: session time: 0:00:00.081 user=test_user database=app_test host=[local]
+2026-11-01 18:34:01.237 UTC [152] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:34:01.237 UTC [153] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:34:01.237 UTC [152] test_user@app_test/[unknown] [local] LOG:  connection authorized: user=test_user database=app_test application_name=pgbench
+2026-11-01 18:34:01.237 UTC [153] test_user@app_test/[unknown] [local] LOG:  connection authorized: user=test_user database=app_test application_name=pgbench
+2026-11-01 18:34:06.236 UTC [153] test_user@app_test/pgbench [local] LOG:  disconnection: session time: 0:00:04.999 user=test_user database=app_test host=[local]
+2026-11-01 18:34:06.237 UTC [152] test_user@app_test/pgbench [local] LOG:  disconnection: session time: 0:00:05.000 user=test_user database=app_test host=[local]
+2026-11-01 18:34:06.291 UTC [160] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:34:06.291 UTC [160] test_user@app_test/[unknown] [local] LOG:  connection authorized: user=test_user database=app_test application_name=psql
+2026-11-01 18:34:06.442 UTC [160] test_user@app_test/psql [local] LOG:  duration: 150.405 ms  statement: SELECT pg_sleep(0.15);
+2026-11-01 18:34:06.450 UTC [160] test_user@app_test/psql [local] LOG:  disconnection: session time: 0:00:00.158 user=test_user database=app_test host=[local]

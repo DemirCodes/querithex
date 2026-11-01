@@ -1,0 +1,95 @@
+2026-11-01 18:29:40.450 UTC [1] LOG:  starting PostgreSQL 16.11 (Debian 16.11-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+2026-11-01 18:29:40.451 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2026-11-01 18:29:40.451 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2026-11-01 18:29:40.453 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-11-01 18:29:40.457 UTC [30] LOG:  database system was shut down at 2026-11-01 18:29:39 UTC
+2026-11-01 18:29:40.461 UTC [1] LOG:  database system is ready to accept connections
+2026-11-01 18:29:50.668 UTC [40] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:29:50.668 UTC [40] postgres@app/[unknown] [local] LOG:  connection authorized: user=postgres database=app application_name=psql
+2026-11-01 18:29:50.671 UTC [40] postgres@app/psql [local] LOG:  disconnection: session time: 0:00:00.003 user=postgres database=app host=[local]
+2026-11-01 18:29:50.724 UTC [47] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:29:50.725 UTC [47] postgres@app/[unknown] [local] LOG:  connection authorized: user=postgres database=app application_name=psql
+2026-11-01 18:29:50.726 UTC [47] postgres@app/psql [local] LOG:  disconnection: session time: 0:00:00.001 user=postgres database=app host=[local]
+2026-11-01 18:29:50.779 UTC [54] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:29:50.779 UTC [54] postgres@app/[unknown] [local] LOG:  connection authorized: user=postgres database=app application_name=psql
+2026-11-01 18:29:50.780 UTC [54] postgres@app/psql [local] LOG:  disconnection: session time: 0:00:00.001 user=postgres database=app host=[local]
+2026-11-01 18:29:50.833 UTC [61] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:29:50.833 UTC [61] postgres@app/[unknown] [local] LOG:  connection authorized: user=postgres database=app application_name=psql
+2026-11-01 18:29:50.834 UTC [61] postgres@app/psql [local] LOG:  disconnection: session time: 0:00:00.001 user=postgres database=app host=[local]
+2026-11-01 18:30:02.949 UTC [69] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:30:02.949 UTC [69] postgres@app/[unknown] [local] LOG:  connection authorized: user=postgres database=app application_name=psql
+2026-11-01 18:30:03.020 UTC [69] postgres@app/psql [local] LOG:  disconnection: session time: 0:00:00.071 user=postgres database=app host=[local]
+2026-11-01 18:30:12.288 UTC [76] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:30:12.288 UTC [76] ro_user@app/[unknown] [local] LOG:  connection authorized: user=ro_user database=app application_name=psql
+2026-11-01 18:30:12.289 UTC [76] ro_user@app/psql [local] LOG:  disconnection: session time: 0:00:00.001 user=ro_user database=app host=[local]
+2026-11-01 18:30:12.343 UTC [83] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:30:12.343 UTC [83] ro_user@app/[unknown] [local] LOG:  connection authorized: user=ro_user database=app application_name=psql
+2026-11-01 18:30:12.348 UTC [83] ro_user@app/psql [local] ERROR:  permission denied for schema public at character 14
+2026-11-01 18:30:12.348 UTC [83] ro_user@app/psql [local] STATEMENT:  CREATE TABLE test_yazma (id int);
+2026-11-01 18:30:12.348 UTC [83] ro_user@app/psql [local] LOG:  disconnection: session time: 0:00:00.005 user=ro_user database=app host=[local]
+2026-11-01 18:30:16.608 UTC [90] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:30:16.609 UTC [90] ro_user@app/[unknown] [local] LOG:  connection authorized: user=ro_user database=app application_name=psql
+2026-11-01 18:30:16.609 UTC [90] ro_user@app/psql [local] ERROR:  permission denied for schema public at character 54
+2026-11-01 18:30:16.609 UTC [90] ro_user@app/psql [local] STATEMENT:  SET default_transaction_read_only = on; CREATE TABLE test2 (id int);
+2026-11-01 18:30:16.610 UTC [90] ro_user@app/psql [local] LOG:  disconnection: session time: 0:00:00.001 user=ro_user database=app host=[local]
+2026-11-01 18:30:45.541 UTC [99] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:30:45.541 UTC [99] postgres@app/[unknown] [local] LOG:  connection authorized: user=postgres database=app application_name=psql
+2026-11-01 18:30:45.561 UTC [99] postgres@app/psql [local] LOG:  disconnection: session time: 0:00:00.020 user=postgres database=app host=[local]
+2026-11-01 18:30:49.855 UTC [106] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:30:49.855 UTC [106] ro_user@app/[unknown] [local] LOG:  connection authorized: user=ro_user database=app application_name=pg_dump
+2026-11-01 18:30:49.885 UTC [106] ro_user@app/pg_dump [local] LOG:  disconnection: session time: 0:00:00.030 user=ro_user database=app host=[local]
+2026-11-01 18:31:06.464 UTC [120] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:31:06.464 UTC [120] ro_user@app/[unknown] [local] LOG:  connection authorized: user=ro_user database=app application_name=psql
+2026-11-01 18:31:06.466 UTC [120] ro_user@app/psql [local] LOG:  disconnection: session time: 0:00:00.002 user=ro_user database=app host=[local]
+2026-11-01 18:31:06.517 UTC [127] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:31:06.518 UTC [127] ro_user@app/[unknown] [local] LOG:  connection authorized: user=ro_user database=app application_name=psql
+2026-11-01 18:31:06.519 UTC [127] ro_user@app/psql [local] LOG:  disconnection: session time: 0:00:00.001 user=ro_user database=app host=[local]
+2026-11-01 18:31:27.232 UTC [135] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:31:27.232 UTC [135] ro_user@app/[unknown] [local] LOG:  connection authorized: user=ro_user database=app application_name=pg_dump
+2026-11-01 18:31:27.297 UTC [135] ro_user@app/pg_dump [local] LOG:  disconnection: session time: 0:00:00.065 user=ro_user database=app host=[local]
+2026-11-01 18:31:45.463 UTC [143] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:31:45.464 UTC [143] ro_user@app/[unknown] [local] LOG:  connection authorized: user=ro_user database=app application_name=pg_dump
+2026-11-01 18:31:45.495 UTC [143] ro_user@app/pg_dump [local] LOG:  disconnection: session time: 0:00:00.031 user=ro_user database=app host=[local]
+2026-11-01 18:31:50.052 UTC [150] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:31:50.053 UTC [150] ro_user@app/[unknown] [local] LOG:  connection authorized: user=ro_user database=app application_name=psql
+2026-11-01 18:31:50.055 UTC [150] ro_user@app/psql [local] LOG:  disconnection: session time: 0:00:00.002 user=ro_user database=app host=[local]
+2026-11-01 18:31:50.107 UTC [157] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:31:50.107 UTC [157] ro_user@app/[unknown] [local] LOG:  connection authorized: user=ro_user database=app application_name=psql
+2026-11-01 18:31:50.108 UTC [157] ro_user@app/psql [local] LOG:  disconnection: session time: 0:00:00.001 user=ro_user database=app host=[local]
+2026-11-01 18:33:14.881 UTC [168] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:33:14.882 UTC [168] postgres@app/[unknown] [local] LOG:  connection authorized: user=postgres database=app application_name=psql
+2026-11-01 18:33:14.883 UTC [168] postgres@app/psql [local] LOG:  disconnection: session time: 0:00:00.001 user=postgres database=app host=[local]
+2026-11-01 18:33:14.941 UTC [175] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:33:14.941 UTC [175] postgres@app/[unknown] [local] LOG:  connection authorized: user=postgres database=app application_name=pgbench
+2026-11-01 18:33:15.035 UTC [175] postgres@app/pgbench [local] LOG:  temporary file: path "base/pgsql_tmp/pgsql_tmp175.1.fileset/1.0", size 8192
+2026-11-01 18:33:15.035 UTC [175] postgres@app/pgbench [local] STATEMENT:  alter table pgbench_accounts add primary key (aid)
+2026-11-01 18:33:15.035 UTC [175] postgres@app/pgbench [local] LOG:  temporary file: path "base/pgsql_tmp/pgsql_tmp175.1.fileset/0.0", size 8192
+2026-11-01 18:33:15.035 UTC [175] postgres@app/pgbench [local] STATEMENT:  alter table pgbench_accounts add primary key (aid)
+2026-11-01 18:33:15.035 UTC [175] postgres@app/pgbench [local] LOG:  temporary file: path "base/pgsql_tmp/pgsql_tmp175.0.fileset/1.0", size 745472
+2026-11-01 18:33:15.035 UTC [175] postgres@app/pgbench [local] STATEMENT:  alter table pgbench_accounts add primary key (aid)
+2026-11-01 18:33:15.036 UTC [175] postgres@app/pgbench [local] LOG:  temporary file: path "base/pgsql_tmp/pgsql_tmp175.0.fileset/0.0", size 1269760
+2026-11-01 18:33:15.036 UTC [175] postgres@app/pgbench [local] STATEMENT:  alter table pgbench_accounts add primary key (aid)
+2026-11-01 18:33:15.037 UTC [175] postgres@app/pgbench [local] LOG:  disconnection: session time: 0:00:00.096 user=postgres database=app host=[local]
+2026-11-01 18:33:19.710 UTC [183] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:33:19.711 UTC [183] postgres@app/[unknown] [local] LOG:  connection authorized: user=postgres database=app application_name=pgbench
+2026-11-01 18:33:19.718 UTC [183] postgres@app/pgbench [local] LOG:  disconnection: session time: 0:00:00.007 user=postgres database=app host=[local]
+2026-11-01 18:33:19.718 UTC [185] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:33:19.719 UTC [186] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:33:19.719 UTC [185] postgres@app/[unknown] [local] LOG:  connection authorized: user=postgres database=app application_name=pgbench
+2026-11-01 18:33:19.719 UTC [186] postgres@app/[unknown] [local] LOG:  connection authorized: user=postgres database=app application_name=pgbench
+2026-11-01 18:33:19.720 UTC [187] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:33:19.720 UTC [188] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:33:19.720 UTC [187] postgres@app/[unknown] [local] LOG:  connection authorized: user=postgres database=app application_name=pgbench
+2026-11-01 18:33:19.721 UTC [188] postgres@app/[unknown] [local] LOG:  connection authorized: user=postgres database=app application_name=pgbench
+2026-11-01 18:33:19.866 UTC [187] postgres@app/pgbench [local] LOG:  duration: 109.472 ms  statement: END;
+2026-11-01 18:33:19.866 UTC [185] postgres@app/pgbench [local] LOG:  duration: 111.243 ms  statement: UPDATE pgbench_branches SET bbalance = bbalance + -3691 WHERE bid = 1;
+2026-11-01 18:33:19.867 UTC [188] postgres@app/pgbench [local] LOG:  duration: 110.067 ms  statement: UPDATE pgbench_branches SET bbalance = bbalance + -375 WHERE bid = 1;
+2026-11-01 18:33:19.867 UTC [186] postgres@app/pgbench [local] LOG:  duration: 110.784 ms  statement: UPDATE pgbench_tellers SET tbalance = tbalance + -1205 WHERE tid = 2;
+2026-11-01 18:33:29.718 UTC [185] postgres@app/pgbench [local] LOG:  disconnection: session time: 0:00:09.999 user=postgres database=app host=[local]
+2026-11-01 18:33:29.719 UTC [187] postgres@app/pgbench [local] LOG:  disconnection: session time: 0:00:09.999 user=postgres database=app host=[local]
+2026-11-01 18:33:29.719 UTC [186] postgres@app/pgbench [local] LOG:  disconnection: session time: 0:00:10.000 user=postgres database=app host=[local]
+2026-11-01 18:33:29.720 UTC [188] postgres@app/pgbench [local] LOG:  disconnection: session time: 0:00:09.999 user=postgres database=app host=[local]
+2026-11-01 18:33:42.928 UTC [197] [unknown]@[unknown]/[unknown] [local] LOG:  connection received: host=[local]
+2026-11-01 18:33:42.929 UTC [197] postgres@app/[unknown] [local] LOG:  connection authorized: user=postgres database=app application_name=psql
+2026-11-01 18:33:43.131 UTC [197] postgres@app/psql [local] LOG:  duration: 201.460 ms  statement: SELECT pg_sleep(0.2);
+2026-11-01 18:33:43.144 UTC [197] postgres@app/psql [local] LOG:  disconnection: session time: 0:00:00.216 user=postgres database=app host=[local]

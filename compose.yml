@@ -1,0 +1,44 @@
+# Querithex Docker ortamı (README K6)
+# main_database: ana veritabanı — SALT OKUNUR erişim
+# test_database: test veritabanı — tüm EXPLAIN ANALYZE burada
+
+services:
+  main_database:
+    image: postgres:16
+    container_name: main_database
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: main_secret
+    ports:
+      - "5433:5432"
+    volumes:
+      - main_data:/var/lib/postgresql/data
+      - ./docker/main/postgresql.conf:/etc/postgresql/postgresql.conf:ro
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    networks:
+      - querithex_net
+
+  test_database:
+    image: postgres:16
+    container_name: test_database
+    environment:
+      POSTGRES_DB: app_test
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: test_secret
+    ports:
+      - "5434:5432"
+    volumes:
+      - test_data:/var/lib/postgresql/data
+      - ./docker/test/postgresql.conf:/etc/postgresql/postgresql.conf:ro
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    networks:
+      - querithex_net
+
+volumes:
+  main_data:
+  test_data:
+
+networks:
+  querithex_net:
+    driver: bridge
