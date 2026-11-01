@@ -1,6 +1,5 @@
 # Querithex — Makefile
 # README Bölüm 13 (Faz 0): -std=c11 -Wall -Wextra -Wpedantic -Werror
-#                          debug hedefi -fsanitize=address,undefined
 
 CC      ?= cc
 CFLAGS  ?= -std=c11 -Wall -Wextra -Wpedantic -Werror -O2
@@ -9,36 +8,35 @@ LDFLAGS ?=
 LDLIBS  ?=
 
 SRC_DIR   := src
-CORE_DIR  := $(SRC_DIR)/core
 BUILD_DIR := build
 TARGET    := querithex
 
 SRCS := \
-	$(SRC_DIR)/main.c \
-	$(SRC_DIR)/cli.c \
-	$(SRC_DIR)/config.c \
-	$(SRC_DIR)/reader.c \
-	$(SRC_DIR)/log_parser.c \
-	$(SRC_DIR)/sql_lexer.c \
-	$(SRC_DIR)/fingerprint.c \
-	$(SRC_DIR)/schema_introspect.c \
-	$(SRC_DIR)/explain_collect.c \
-	$(SRC_DIR)/security.c \
-	$(SRC_DIR)/performance.c \
-	$(SRC_DIR)/incidents.c \
-	$(SRC_DIR)/stats.c \
-	$(SRC_DIR)/ai_advisor.c \
-	$(SRC_DIR)/report.c \
-	$(SRC_DIR)/report_json.c \
-	$(SRC_DIR)/report_csv.c \
-	$(SRC_DIR)/report_html.c \
-	$(SRC_DIR)/signal.c \
-	$(CORE_DIR)/buffer.c \
-	$(CORE_DIR)/array.c \
-	$(CORE_DIR)/hashmap.c \
-	$(CORE_DIR)/arena.c
+	src/main.c \
+	src/cli.c \
+	src/config.c \
+	src/reader.c \
+	src/log_parser.c \
+	src/sql_lexer.c \
+	src/fingerprint.c \
+	src/schema_introspect.c \
+	src/explain_collect.c \
+	src/security.c \
+	src/performance.c \
+	src/incidents.c \
+	src/stats.c \
+	src/ai_advisor.c \
+	src/report.c \
+	src/report_json.c \
+	src/report_csv.c \
+	src/report_html.c \
+	src/signal.c \
+	src/core/buffer.c \
+	src/core/array.c \
+	src/core/hashmap.c \
+	src/core/arena.c
 
-OBJS := $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRCS))
+OBJS := $(patsubst src/%.c,build/%.o,$(SRCS))
 
 .PHONY: all clean debug test
 
@@ -51,7 +49,6 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 
-# Debug hedefi: ASan + UBSan (README Faz 0)
 debug: CFLAGS := -std=c11 -Wall -Wextra -Wpedantic -Werror -g -O0 -fsanitize=address,undefined
 debug: LDFLAGS := -fsanitize=address,undefined
 debug: clean all
