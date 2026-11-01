@@ -38,7 +38,7 @@ SRCS := \
 	$(CORE_DIR)/hashmap.c \
 	$(CORE_DIR)/arena.c
 
-OBJS := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
+OBJS := $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRCS))
 
 .PHONY: all clean debug test
 
