@@ -41,7 +41,7 @@ all: $(TARGET)
 $(TARGET): $(OBJS)
 	$(CC) $(LDFLAGS) -o $@ $(OBJS) $(LDLIBS)
 
-# Her dosya için ayrı ayrı kural (pattern kullanmadan, %100 garantili)
+# Her dosya için ayrı ayrı kural
 $(BUILD_DIR)/main.o: src/main.c
 	@mkdir -p $(BUILD_DIR)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
@@ -134,12 +134,17 @@ $(BUILD_DIR)/core/arena.o: src/core/arena.c
 	@mkdir -p $(BUILD_DIR)/core
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 
+# --- TEST KURALLARI ---
+$(BUILD_DIR)/test_buffer: tests/unit/test_buffer.c src/core/buffer.c src/core/buffer.h
+	@mkdir -p $(BUILD_DIR)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -Isrc/core -o $@ tests/unit/test_buffer.c src/core/buffer.c
+
+test: all
+	@./tests/run.sh
+
 debug: CFLAGS := -std=c11 -Wall -Wextra -Wpedantic -Werror -g -O0 -fsanitize=address,undefined
 debug: LDFLAGS := -fsanitize=address,undefined
 debug: clean all
-
-test: all
-	./tests/run.sh
 
 clean:
 	rm -rf $(BUILD_DIR) $(TARGET)
