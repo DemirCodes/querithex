@@ -43,8 +43,11 @@ if [ -d "$UNIT_DIR" ] && [ "$(ls -A "$UNIT_DIR"/*.c 2>/dev/null)" ]; then
         mkdir -p build
         
         echo "Derleniyor: $test_file"
-        # Not: Test dosyaları src/ veya src/core/ içindeki .c dosyalarını include edebilir.
-        gcc -std=c11 -Wall -Wextra -Wpedantic -Werror -g -Isrc -Isrc/core -o "$out_bin" "$test_file" "$src_file"
+        # Tüm core ve src modüllerini derle (main.c hariç, çünkü main testte var)
+        gcc -std=c11 -Wall -Wextra -Wpedantic -Werror -g -Isrc -Isrc/core \
+            -o "$out_bin" "$test_file" \
+            src/core/*.c \
+            src/reader.c src/log_parser.c src/fingerprint.c src/config.c
         
         echo "Çalıştırılıyor: $test_name"
         "$out_bin"
