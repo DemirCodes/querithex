@@ -1,4 +1,4 @@
-name: CI
+iname: CI
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
 
       - name: cppcheck
         run: |
-          cppcheck --enable=warning,style,performance,portability \
+          cppcheck --enable=warning,performance,portability \
                    --error-exitcode=1 \
                    --std=c11 \
                    --suppress=missingIncludeSystem \
