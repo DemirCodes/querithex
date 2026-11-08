@@ -47,7 +47,7 @@ if [ -d "$UNIT_DIR" ] && [ "$(ls -A "$UNIT_DIR"/*.c 2>/dev/null)" ]; then
         gcc -std=c11 -Wall -Wextra -Wpedantic -Werror -g -Isrc -Isrc/core \
             -o "$out_bin" "$test_file" \
             src/core/*.c \
-            src/reader.c src/log_parser.c src/fingerprint.c src/config.c
+            src/reader.c src/log_parser.c src/fingerprint.c src/config.c src/stats.c
         
         echo "Çalıştırılıyor: $test_name"
         "$out_bin"
